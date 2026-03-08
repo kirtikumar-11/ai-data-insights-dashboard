@@ -162,19 +162,30 @@ async def get_history(limit: int = 20, db: Session = Depends(get_db)):
 # Helpers
 # ---------------------------------------------------------------------------
 def _parse_insight_response(response: str) -> tuple[str, str]:
-    """Parse the ANSWER: ... INSIGHT: ... format from the LLM."""
-    answer = ""
-    insight = ""
+    """Parse the ANSWER: ... INSIGHT: ... format from the LLM, supporting multi-line strings."""
+    answer_parts = []
+    insight_parts = []
+    current_mode = None
+
     for line in response.split("\n"):
-        line = line.strip()
-        if line.upper().startswith("ANSWER:"):
-            answer = line[len("ANSWER:"):].strip()
-        elif line.upper().startswith("INSIGHT:"):
-            insight = line[len("INSIGHT:"):].strip()
+        clean_line = line.strip()
+        if clean_line.upper().startswith("ANSWER:"):
+            current_mode = "answer"
+            answer_parts.append(clean_line[len("ANSWER:"):].strip())
+        elif clean_line.upper().startswith("INSIGHT:"):
+            current_mode = "insight"
+            insight_parts.append(clean_line[len("INSIGHT:"):].strip())
+        elif current_mode == "answer" and clean_line:
+            answer_parts.append(clean_line)
+        elif current_mode == "insight" and clean_line:
+            insight_parts.append(clean_line)
+
+    answer = " ".join(answer_parts).strip()
+    insight = " ".join(insight_parts).strip()
 
     # Fallback if format wasn't followed
     if not answer and not insight:
-        answer = response
+        answer = response.strip()
         insight = ""
 
     return answer, insight
