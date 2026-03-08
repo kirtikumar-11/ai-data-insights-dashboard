@@ -124,6 +124,9 @@ async def handle_query(req: QueryRequest, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=str(e))
 
     except Exception as e:
+        import traceback
+        traceback.print_exc()
+        
         elapsed = round(time.time() - start, 3)
         log_query(
             db=db,
