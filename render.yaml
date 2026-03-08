@@ -10,6 +10,8 @@ services:
         sync: false # Set this securely in the Render dashboard!
       - key: GEMINI_MODEL
         value: gemini-2.5-flash
+      - key: PYTHON_VERSION
+        value: 3.11.0
       - key: DATABASE_URL
         fromDatabase:
           name: ai-dashboard-db
