@@ -1,0 +1,64 @@
+# ==============================================================================
+# AI Data Insights Dashboard - .gitignore
+# ==============================================================================
+
+# 1. Environment Variables & Secrets (NEVER UPLOAD THESE)
+# Contains your Gemini API key and PostgreSQL password
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 2. Raw Data Files
+# These 130MB+ CSV files are too large for Git and are already in the database
+/data/*.csv
+/data/
+
+# 3. Python & Backend
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+backend/env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 4. Node.js & Frontend (Next.js)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.swc/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+frontend/.eslintcache
+
+# 5. OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
