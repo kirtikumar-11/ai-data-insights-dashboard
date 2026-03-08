@@ -33,6 +33,7 @@ RULES:
 - If the question is ambiguous, make a reasonable assumption and proceed.
 - For monetary values, use the 'price' column from order_items or 'payment_value' from order_payments.
 - The 'products' table has a 'product_category' column with English category names.
+- Ensure the query is complete, well-formed, and contains a FROM clause.
 
 USER QUESTION:
 {question}
@@ -43,8 +44,8 @@ SQL QUERY:"""
         model=MODEL,
         contents=prompt,
         config={
-            "temperature": 0,
-            "max_output_tokens": 500,
+            "temperature": 0.1,
+            "max_output_tokens": 2048,
         }
     )
 
