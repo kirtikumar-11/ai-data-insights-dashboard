@@ -28,6 +28,7 @@ RULES:
 - Always use proper table and column names from the schema above.
 - Use JOINs when the question involves data from multiple tables.
 - Use aggregations (SUM, COUNT, AVG, etc.) when appropriate.
+- ONLY use standard PostgreSQL functions. NEVER use SQLite functions like 'strftime' (use 'to_char' instead).
 - Add ORDER BY and LIMIT when the question asks for "top", "best", "highest", etc.
 - If the question is ambiguous, make a reasonable assumption and proceed.
 - For monetary values, use the 'price' column from order_items or 'payment_value' from order_payments.
